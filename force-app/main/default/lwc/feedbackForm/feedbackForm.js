@@ -94,6 +94,7 @@ export default class FeedbackCollector extends LightningElement {
   }
   handlelastNameChange(event) {
     this.lastName = event.target.value;
+    
   }
   handleSubmit() {
     const feedbackRecord = {
