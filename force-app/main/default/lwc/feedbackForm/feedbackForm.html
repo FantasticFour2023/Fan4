@@ -1,0 +1,219 @@
+<!--
+@description       : 
+@author            : Meenakshi Telu
+@group             : 
+@last modified on  : 10-09-2023
+@last modified by  : Meenakshi Telu
+-->
+
+
+<template>
+
+
+    <article class="slds-card my-card">
+
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span style=" width: 70%;">
+
+                        <span class="slds-icon_container slds-icon-standard-account" title="Feedback">
+
+
+                            <lightning-icon icon-name="standard:survey" alternative-text="feedback"
+                                title="Feedback"></lightning-icon>
+
+                            <span class="slds-assistive-text">Feedback</span>
+                        </span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a href="#" class="slds-card__header-link slds-truncate" title="Feedback">
+                            <span>Feedback</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+
+            <div class="slds-m-around_medium">
+                <h2 class="my-h2"> We're genuinely interested in hearing about your
+                    experience and the service you've received. Taking just a few minutes of your time,
+                    this feedback will enable us to evaluate our performance and discover
+                    opportunities for enhancing the level of service we provide to our valued customers.
+
+
+
+
+                </h2>
+                <br />
+
+                <h2 class="my-h2">Kindly lend your support in helping us achieve our goals.
+                </h2>
+            </div>
+
+            <div class="slds-m-top_medium slds-m-bottom_x-large">
+                <div class="slds-p-around_medium lgc-bg">
+                    <span>
+                        <lightning-input label="First Name" required="true" name="firstName" value={name}
+                            onchange={handlefirstNameChange}></lightning-input>
+                        <lightning-input label="Last Name" required="true" name="lastName" value={name1}
+                            onchange={handlelastNameChange}></lightning-input>
+                    </span>
+
+                    <lightning-input label="Email" value={email} onchange={handleEmailChange}></lightning-input>
+                    <lightning-input label="Phone" value={phone} onchange={handlePhoneChange}></lightning-input>
+                    <lightning-combobox
+                        label="How satisfied were you overall with your recent service experience with us?*"
+                        name="selectOption" value={selectedOption} options={picklistOptions}
+                        onchange={handleOptionChange}>
+                    </lightning-combobox>
+
+                    <lightning-textarea label="What is the main reason for giving this satisfaction rating?"
+                        name="feedback3" value={feedback3} onchange={handleFeedbackChange}></lightning-textarea>
+
+                </div>
+
+
+                <div class="slds-m-top_medium slds-m-bottom_x-large">
+                    <div class="slds-p-around_medium lgc-bg">
+                        <lightning-tile label="General level of knowledge of staff who dealt with you*" type="media">
+
+                            <lightning-avatar slot="media"
+                                src="https://myrepublica.nagariknetwork.com/uploads/media/2019/July/Knowledge-1.jpg"
+                                fallback-icon-name="standard:person_account"
+                                alternative-text="Delivery Service"></lightning-avatar>
+
+                            <div class="rate">
+                                <input type="radio" id="star5" name="knowledge" value="5" onchange={rating} />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="knowledge" value="4" onchange={rating} />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="knowledge" value="3" onchange={rating} />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="knowledge" value="2" onchange={rating} />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="knowledge" value="1" onchange={rating} />
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+                        </lightning-tile>
+
+                        <lightning-tile label="Helpfulness and friendliness of staff*" type="media">
+                            <lightning-avatar slot="media"
+                                src="https://www.shutterstock.com/shutterstock/photos/2075663314/display_1500/stock-vector-friendliness-flat-icon-colored-sign-from-positive-attitude-collection-creative-friendliness-icon-2075663314.jpg"
+                                fallback-icon-name="standard:person_account"
+                                alternative-text="Burger"></lightning-avatar>
+                            <div class="rate">
+                                <div class="rate">
+                                    <input type="radio" id="star25" name="friendliness" value="5" onchange={rating} />
+                                    <label for="star25" title="text">5 stars</label>
+                                    <input type="radio" id="star24" name="friendliness" value="4" onchange={rating} />
+                                    <label for="star24" title="text">4 stars</label>
+                                    <input type="radio" id="star23" name="friendliness" value="3" onchange={rating} />
+                                    <label for="star23" title="text">3 stars</label>
+                                    <input type="radio" id="star22" name="friendliness" value="2" onchange={rating} />
+                                    <label for="star22" title="text">2 stars</label>
+                                    <input type="radio" id="star21" name="friendliness" value="1" onchange={rating} />
+                                    <label for="star21" title="text">1 star</label>
+                                </div>
+
+                            </div>
+                        </lightning-tile>
+
+                        <lightning-tile label="Ability of staff to offer advice and guidance where needed*"
+                            type="media">
+                            <lightning-avatar slot="media"
+                                src="https://www.galenaparkisd.com/cms/lib/TX02217083/Centricity/Domain/3454/blobid2.png"
+                                fallback-icon-name="standard:person_account"
+                                alternative-text="Pizza"></lightning-avatar>
+                            <div class="rate">
+                                <div class="rate">
+                                    <input type="radio" id="star15" name="guidance" value="5" onchange={rating} />
+                                    <label for="star15" title="text">5 stars</label>
+                                    <input type="radio" id="star14" name="guidance" value="4" onchange={rating} />
+                                    <label for="star14" title="text">4 stars</label>
+                                    <input type="radio" id="star13" name="guidance" value="3" onchange={rating} />
+                                    <label for="star13" title="text">3 stars</label>
+                                    <input type="radio" id="star12" name="guidance" value="2" onchange={rating} />
+                                    <label for="star12" title="text">2 stars</label>
+                                    <input type="radio" id="star11" name="guidance" value="1" onchange={rating} />
+                                    <label for="star11" title="text">1 star</label>
+                                </div>
+                            </div>
+                        </lightning-tile>
+
+
+                        <lightning-tile label="Being dealt with quickly and efficiently*" type="media">
+                            <lightning-avatar slot="media"
+                                src="https://efficiencyforall.org/wordpress/wp-content/uploads/2018/12/EfficiencyIsEfficientSM.jpg"
+                                fallback-icon-name="standard:person_account"
+                                alternative-text="Packaging"></lightning-avatar>
+                            <div class="rate">
+                                <div class="rate">
+                                    <input type="radio" id="star35" name="efficiency" value="5" onchange={rating} />
+                                    <label for="star35" title="text">5 stars</label>
+                                    <input type="radio" id="star34" name="efficiency" value="4" onchange={rating} />
+                                    <label for="star34" title="text">4 stars</label>
+                                    <input type="radio" id="star33" name="efficiency" value="3" onchange={rating} />
+                                    <label for="star33" title="text">3 stars</label>
+                                    <input type="radio" id="star32" name="efficiency" value="2" onchange={rating} />
+                                    <label for="star32" title="text">2 stars</label>
+                                    <input type="radio" id="star31" name="efficiency" value="1" onchange={rating} />
+                                    <label for="star31" title="text">1 star</label>
+                                </div>
+                            </div>
+                        </lightning-tile>
+                        <div class="slds-m-top_medium slds-m-bottom_x-large">
+
+                            <div class="slds-p-around_medium lgc-bg">
+                                <lightning-textarea label="What could we do to improve
+                         your in-branch experience or the quality of service that we 
+                         provide to our customers?*" name="feedback" value={feedback}
+                                    onchange={handleFeedbackChange}></lightning-textarea>
+
+                                <lightning-textarea label=" Please use the space provided to 
+                            give feedback or any other comments that you have about us and 
+                            the products and services that we offer?* *" name="feedback2" value={feedback2}
+                                    onchange={handleFeedbackChange}></lightning-textarea>
+                            </div>
+                        </div>
+                        <lightning-button variant="brand" label="Submit Feedback"
+                            onclick={handleSubmit}></lightning-button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </article>
+
+
+
+    <template if:true={showErrorModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" >
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                  
+                    <h2>Your response has been recorded, Thank you for time and feedback</h2>
+                    </br>
+                    <div style="text-align:center;">
+                        <lightning-button class="slds-m-top_small" variant="brand" label="Close"
+                            onclick={closeErrorModal}></lightning-button>
+                    </div>
+                </header>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

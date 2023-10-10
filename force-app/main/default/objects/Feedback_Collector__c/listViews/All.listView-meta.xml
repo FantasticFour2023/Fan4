@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Email__c</columns>
+    <columns>Last_Name__c</columns>
+    <columns>First_Name__c</columns>
+    <columns>Feedback__c</columns>
+    <columns>Feedback2__c</columns>
+    <columns>Feedback3__c</columns>
+    <columns>Sentiment_Score__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>First_Name__c</field>
+        <operation>contains</operation>
+        <value>pranav</value>
+    </filters>
+    <label>All</label>
+</ListView>

@@ -1,0 +1,77 @@
+/* feedbackForm.css */
+.feedback-container {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+/* Add more CSS rules as needed */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rate>input:checked~label {
+    color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+    color: #deb217;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+    color: #c59b08;
+}
+.my-card {
+   
+    width: 70%;
+    /* Add custom card background color */
+    background-color: #f0f0f0be;
+    /* Add custom border */
+    border: 1px solid #ccc;
+    /* Add padding and margin for spacing */
+    padding: 16px;
+    margin: 16px;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+}
+
+.my-h2 {
+    text-align: center; /* Center-align the text */
+    /* Add any other styles as needed */
+}
+.centered-container {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    height: 100vh; /* Ensure full viewport height */
+}

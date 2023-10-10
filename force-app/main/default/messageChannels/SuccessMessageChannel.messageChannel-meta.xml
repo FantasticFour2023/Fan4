@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Sample Channel File</masterLabel>
+    <isExposed>true</isExposed>
+    <description>This is a sample Lightning Message Channel.</description>
+ 
+    <lightningMessageFields>
+        <fieldName>a_Variable1</fieldName>
+        <description>Variable 1 Description - optional</description>
+    </lightningMessageFields>
+ 
+    <lightningMessageFields>
+        <fieldName>a_Variable2</fieldName>
+        <description>Variable 2 Description - optional</description>
+    </lightningMessageFields>
+ 
+</LightningMessageChannel>

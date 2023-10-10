@@ -1,0 +1,20 @@
+<apex:page >
+    <!-- Include other Visualforce content as needed -->
+
+    <script>
+        // Function to parse URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[?&]' + name + '=([^&#]*)');
+            const results = regex.exec(window.location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Check if the 'showToast' parameter is present in the URL
+        const showToastParam = getUrlParameter('showToast');
+        if (showToastParam === 'true') {
+            // Display the toast notification using your preferred method
+            alert('Your Response is recorded, Thank you for your time and Feedback');
+        }
+    </script>
+</apex:page>

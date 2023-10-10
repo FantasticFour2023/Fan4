@@ -1,0 +1,66 @@
+<apex:page standardStylesheets="true" showHeader="false" lightningStylesheets="True">
+
+    
+    
+    <apex:includeLightning />
+     <div id="LightningAppDivId1">
+        <!-- Lightning Web Component will be included here. -->
+    </div>
+      <div id="LightningAppDivId">
+        <!-- Lightning Web Component will be included here. -->
+    </div>
+    
+    <div id="success-message"></div>
+
+     
+   
+ 
+     <script>
+     document.addEventListener('lightning__showtoast', event => {
+        sforce.one.showToast(event.toastAttributes);
+    });
+         $Lightning.use(
+             "c:FeedbackWrapper", // Name of Aura Dependency app where c is namespace.
+             function() { // Callback function
+             $Lightning.createComponent(
+                     "c:banner", // Name of Lightning Component where c is namespace.
+                     {}, // attribute parameters
+                     "LightningAppDivId1" // Id of the element where Lightning Component will be rendered.
+                 );
+                 $Lightning.createComponent(
+                     "c:feedbackForm", // Name of Lightning Component where c is namespace.
+                     {}, // attribute parameters
+                     "LightningAppDivId" // Id of the element where Lightning Component will be rendered.
+                 );
+                  
+             }
+         );
+     </script>
+     
+       
+    
+     
+      <html>
+    <head>
+        <style>
+            /* Add CSS styles here */
+            .container {
+                background-color: #f2f2f2;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .flow-container {
+                padding: 10px;
+            }
+        </style>
+    </head>
+   
+    </html>
+     
+</apex:page>
