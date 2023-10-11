@@ -1,0 +1,31 @@
+{
+	"name": "ff_sf_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fantasticfoursynapse-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Feedback_Collector__c.parquet",
+				"folderPath": "sfinput",
+				"fileSystem": "fantasticfourfilesystem"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Id",
+				"type": "UTF8"
+			},
+			{
+				"name": "Name",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}
