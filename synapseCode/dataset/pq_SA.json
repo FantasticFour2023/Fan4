@@ -1,0 +1,22 @@
+{
+	"name": "pq_SA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fantasticfoursynapse-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "SentimentAnalysisScore.parquet",
+				"folderPath": "synoutput",
+				"fileSystem": "fantasticfourfilesystem"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

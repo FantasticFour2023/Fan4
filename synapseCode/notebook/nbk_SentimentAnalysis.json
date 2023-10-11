@@ -1,0 +1,174 @@
+{
+	"name": "nbk_SentimentAnalysis",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "ffSparkPool",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 1,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "true",
+				"spark.dynamicAllocation.minExecutors": "1",
+				"spark.dynamicAllocation.maxExecutors": "1",
+				"spark.autotune.trackingId": "6b59865d-815e-4eb5-9692-2b436e0291c2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/23731aa3-4b0a-4570-b586-3428fd40a659/resourceGroups/FantasticFour/providers/Microsoft.Synapse/workspaces/fantasticfoursynapse/bigDataPools/ffSparkPool",
+				"name": "ffSparkPool",
+				"type": "Spark",
+				"endpoint": "https://fantasticfoursynapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/ffSparkPool",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.3",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\n",
+					"from nltk.tokenize import RegexpTokenizer  \n",
+					"from nltk.stem.porter import PorterStemmer  \n",
+					"from nltk.corpus import stopwords\n",
+					"import nltk  \n",
+					"from sklearn.feature_extraction.text import CountVectorizer  \n",
+					"from sklearn.naive_bayes import MultinomialNB  \n",
+					"import pyspark \n",
+					"from pyspark.sql import SparkSession \n",
+					"import pandas as pd\n",
+					"\n",
+					"res=[]\n",
+					"\n",
+					"df = spark.read.load('abfss://fantasticfourfilesystem@fantasticfouraccount.dfs.core.windows.net/sfinput/Feedback_Collector__c.parquet', format='parquet')\n",
+					"df.createOrReplaceTempView(\"SF_Src\")\n",
+					"df1 = spark.sql(\"Select Id,Feedback__c,Feedback2__c,Feedback3__c,Knowledge_Rating__c,Friendliness_Rating__c,Guidance_Rating__c,Efficiency_Rating__c,Satisfaction_Rating__c FROM SF_Src WHERE Sentiment_Score__c IS NULL\")\n",
+					"df_collect=df1.collect()\n",
+					"sf_data=[]\n",
+					"test_set=[]\n",
+					"rating_data=[]\n",
+					"for df_row in df_collect:\n",
+					"    feedback=(df_row[\"Feedback__c\"] or '')+ \" \"+(df_row[\"Feedback2__c\"] or '')+\" \"+(df_row[\"Feedback3__c\"] or '')\n",
+					"    rating = (df_row[\"Knowledge_Rating__c\"] or 0) + (df_row[\"Friendliness_Rating__c\"] or 0) + (df_row[\"Guidance_Rating__c\"] or 0) + (df_row[\"Efficiency_Rating__c\"] or 0)\n",
+					"    if rating/4 < 2.5:\n",
+					"        rating = -1\n",
+					"    elif rating/4 > 3.5:\n",
+					"        rating = 1\n",
+					"    else:\n",
+					"        rating=0\n",
+					"    rating_data.append(rating)\n",
+					"    sf_id=df_row[\"Id\"] \n",
+					"    sf_data_row=[sf_id,feedback]\n",
+					"    sf_data.append(sf_data_row)\n",
+					"\n",
+					"for x in sf_data:\n",
+					"    test_set.append(x[1])\n",
+					"\n",
+					"def getCleanedText(text):  \n",
+					"  texttext=text.lower()  \n",
+					"  #tokenize  \n",
+					"  tokens=tokenizer.tokenize(text)  \n",
+					"  new_tokens=[token for token in tokens if token not in en_stopwords]  \n",
+					"  stemmed_tokens=[ps.stem(tokens) for tokens in new_tokens]  \n",
+					"  clean_text=\" \".join(stemmed_tokens)  \n",
+					"  return clean_text   \n",
+					"\n",
+					"\n",
+					"training_set=[\"the product was okay\",\n",
+					"              \"the product was fine\",\n",
+					"              \"I had a great time using the product\",\n",
+					"              \"you should throw this in the dustbin, it is useless\",\n",
+					"              \"it was amazing, look forward to new features on this\",\n",
+					"              \"The service was really bad\",\n",
+					"              \"Worst product ever\",\n",
+					"              \"Very very bad product, pathetic\",\n",
+					"              \"Very satisfied with the product, very smooth experience\"]\n",
+					"training_set_res=[0,0,1,-1,1,-1,-1,-1,1]\n",
+					"\n",
+					"if(len(sf_data)!=0):\n",
+					"    nltk.download('stopwords')\n",
+					"    tokenizer=RegexpTokenizer(r'\\w+')\n",
+					"    en_stopwords=set(stopwords.words('english'))\n",
+					"    ps=PorterStemmer()\n",
+					"\n",
+					"    clean=[getCleanedText(j) for j in training_set]  \n",
+					"    test_clean=[getCleanedText(j) for j in test_set]\n",
+					"\n",
+					"    cv=CountVectorizer(ngram_range=(1,2))  \n",
+					"    clean_vect=cv.fit_transform(clean).toarray()  \n",
+					"\n",
+					"    #print(cv.get_feature_names_out())  \n",
+					"    test_clean_vect=cv.transform(test_clean).toarray()\n",
+					"\n",
+					"    mlb=MultinomialNB()  \n",
+					"    mlb.fit(clean_vect,training_set_res)  \n",
+					"    pred=mlb.predict(test_clean_vect)\n",
+					"\n",
+					"    for count in range(0,len(sf_data)):\n",
+					"        final_pred=pred[count].item()\n",
+					"        if(rating_data[count]==0):\n",
+					"            final_pred=pred[count].item()\n",
+					"        elif(pred[count].item()==0):\n",
+					"            final_pred=rating_data[count]\n",
+					"        else:\n",
+					"            if(rating_data[count]!=pred[count].item()):\n",
+					"                final_pred=0\n",
+					"        res.append([sf_data[count][0],final_pred])\n",
+					"\n",
+					"    spark = SparkSession.builder.appName('sparkdf').getOrCreate() \n",
+					"    df_res= spark.createDataFrame(res, [\"Id\",\"Sentiment_Score\"])\n",
+					"    df_res=df_res.toPandas() \n",
+					"    df_res.to_parquet(\"abfss://fantasticfourfilesystem@fantasticfouraccount.dfs.core.windows.net/synoutput/SentimentAnalysisScore.parquet\")\n",
+					"    \n",
+					"else:\n",
+					"    df_res=pd.DataFrame(columns = ['Id', 'Sentiment_Score'])\n",
+					"    df_res.to_parquet(\"abfss://fantasticfourfilesystem@fantasticfouraccount.dfs.core.windows.net/synoutput/SentimentAnalysisScore.parquet\")"
+				],
+				"execution_count": 18
+			}
+		]
+	}
+}

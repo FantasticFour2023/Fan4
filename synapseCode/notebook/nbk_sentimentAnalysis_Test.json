@@ -1,0 +1,143 @@
+{
+	"name": "nbk_sentimentAnalysis_Test",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "ffSparkPool",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "f2b86f34-cd5d-470d-a097-4d3e8e584713"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/23731aa3-4b0a-4570-b586-3428fd40a659/resourceGroups/FantasticFour/providers/Microsoft.Synapse/workspaces/fantasticfoursynapse/bigDataPools/ffSparkPool",
+				"name": "ffSparkPool",
+				"type": "Spark",
+				"endpoint": "https://fantasticfoursynapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/ffSparkPool",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.3",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\n",
+					"df = spark.read.load('abfss://fantasticfourfilesystem@fantasticfouraccount.dfs.core.windows.net/sfinput/Feedback_Collector__c.parquet', format='parquet')\n",
+					"df.createOrReplaceTempView(\"SF_Src\")"
+				],
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "sparksql"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%sql\n",
+					"--Select * FROM SF_Src\n",
+					"Select Id, Case when RIGHT(id,1) IN ('Q','E','Y','M') THEN 1 When RIGHT(id,1) IN ('U','C','A','G') THEN -1 ELSE 0 END AS Sentiment_Score FROM SF_Src"
+				],
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "sparksql"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%sql\n",
+					"--Select * FROM SF_Src\n",
+					"Select distinct RIGHT(id,1) FROM SF_Src"
+				],
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\n",
+					"df1 = spark.sql(\"Select Id, Case when RIGHT(id,1) IN ('Q','E','Y','M') THEN 1 When RIGHT(id,1) IN ('U','C','A','G') THEN -1 ELSE 0 END AS Sentiment_Score FROM SF_Src\")\n",
+					"df1.coalesce(1).write.parquet('abfss://fantasticfourfilesystem@fantasticfouraccount.dfs.core.windows.net/sfinput/TestFeedbackScore.parquet')"
+				],
+				"execution_count": 7
+			}
+		]
+	}
+}

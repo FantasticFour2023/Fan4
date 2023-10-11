@@ -1,0 +1,16 @@
+{
+	"name": "sf_feedbackCollector",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Salesforce1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SalesforceObject",
+		"schema": [],
+		"typeProperties": {
+			"objectApiName": "Feedback_Collector__c"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}
