@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "fantasticfoursynapse"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"Salesforce1_password": {
+			"value": ""
+		},
+		"Salesforce1_securityToken": {
+			"value": ""
+		},
+		"fantasticfoursynapse-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:fantasticfoursynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://fantasticfouraccount.dfs.core.windows.net/"
+		},
+		"Salesforce1_properties_typeProperties_environmentUrl": {
+			"value": "https://login.salesforce.com"
+		},
+		"Salesforce1_properties_typeProperties_username": {
+			"value": "fantasticfour@challange.com"
+		},
+		"fantasticfoursynapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://fantasticfouraccount.dfs.core.windows.net"
+		}
+	}
+}
