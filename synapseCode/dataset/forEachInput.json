@@ -1,0 +1,23 @@
+{
+	"name": "forEachInput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fantasticfoursynapse-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"@forEachInputFolder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "input",
+				"fileSystem": "fantasticfourfilesystem"
+			}
+		}
+	}
+}
