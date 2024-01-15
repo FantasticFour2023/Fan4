@@ -8,10 +8,80 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"isSequential": false
+					"items": {
+						"value": "@pipeline().parameters.FilestoCopy",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"fileListPath": {
+											"value": "@item()",
+											"type": "Expression"
+										},
+										"deleteFilesAfterCompletion": false
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "forEachInput",
+									"type": "DatasetReference",
+									"parameters": {
+										"@forEachInputFolder": {
+											"value": "@pipeline().parameters.inputfolder",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Binary1",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
 				}
 			}
 		],
+		"parameters": {
+			"FilestoCopy": {
+				"type": "array",
+				"defaultValue": "[_DSC0056 copy,Jaya Aadhaar]"
+			},
+			"inputfolder": {
+				"type": "string",
+				"defaultValue": "input"
+			}
+		},
 		"annotations": []
 	}
 }
