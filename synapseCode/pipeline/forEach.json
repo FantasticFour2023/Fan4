@@ -100,10 +100,7 @@
 						"referenceName": "forEachInput",
 						"type": "DatasetReference",
 						"parameters": {
-							"@forEachInputFolder": {
-								"value": "@pipeline().parameters.inputfolder",
-								"type": "Expression"
-							}
+							"SourceFolder": "input"
 						}
 					},
 					"fieldList": [
@@ -111,6 +108,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {

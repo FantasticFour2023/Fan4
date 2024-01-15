@@ -6,8 +6,8 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"@forEachInputFolder": {
-				"type": "string",
+			"SourceFolder": {
+				"type": "String",
 				"defaultValue": "input"
 			}
 		},
@@ -16,7 +16,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "input",
+				"folderPath": {
+					"value": "@dataset().SourceFolder",
+					"type": "Expression"
+				},
 				"fileSystem": "fantasticfourfilesystem"
 			}
 		}
