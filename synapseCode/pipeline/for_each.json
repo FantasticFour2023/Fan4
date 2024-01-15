@@ -16,11 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "forEachInput",
-						"type": "DatasetReference",
-						"parameters": {
-							"@forEachInputFolder": "input"
-						}
+						"referenceName": "Binary2",
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"itemName"
