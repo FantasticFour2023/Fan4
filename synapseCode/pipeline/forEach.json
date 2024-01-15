@@ -5,11 +5,18 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@pipeline().parameters.FilestoCopy",
+						"value": "@activity('Get Metadata1').output.itemName",
 						"type": "Expression"
 					},
 					"isSequential": false,
@@ -70,13 +77,47 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "inputfolder",
+						"value": "input"
+					}
+				],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "forEachInput",
+						"type": "DatasetReference",
+						"parameters": {
+							"@forEachInputFolder": {
+								"value": "@pipeline().parameters.inputfolder",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
 			}
 		],
 		"parameters": {
-			"FilestoCopy": {
-				"type": "array",
-				"defaultValue": "[_DSC0056 copy,Jaya Aadhaar]"
-			},
 			"inputfolder": {
 				"type": "string",
 				"defaultValue": "input"
