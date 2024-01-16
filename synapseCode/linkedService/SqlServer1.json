@@ -1,0 +1,25 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"parameters": {
+			"DbName": {
+				"type": "String"
+			},
+			"DbServerName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=@{linkedService().DbServerName};initial catalog=@{linkedService().DbName}",
+			"userName": "Prasad_Laptop",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1Y2YyYjRjZC01ZmNjLTQ0YTQtYWUyOC01NmE5YmFkNjhkZTgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IntegrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
