@@ -4,18 +4,19 @@
 	"properties": {
 		"parameters": {
 			"DbName": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "localhost"
 			},
 			"DbServerName": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "Prasad_OnPrem"
 			}
 		},
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=@{linkedService().DbServerName};initial catalog=@{linkedService().DbName}",
-			"userName": "Prasad_Laptop",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1Y2YyYjRjZC01ZmNjLTQ0YTQtYWUyOC01NmE5YmFkNjhkZTgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=False;data source=@{linkedService().DbServerName};initial catalog=@{linkedService().DbName};user id=Prasad_Laptop",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmZDg0ZWZkMi02NGFhLTRjMmQtOTQ4MC0wNmM3OTc4MzQ2YzciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "IntegrationRuntime1",
