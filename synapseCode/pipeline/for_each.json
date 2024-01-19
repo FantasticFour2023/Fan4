@@ -121,7 +121,8 @@
 		],
 		"parameters": {
 			"SourceFolder": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "input"
 			}
 		},
 		"annotations": []
