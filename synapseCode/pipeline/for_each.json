@@ -19,7 +19,10 @@
 						"referenceName": "forEachInput",
 						"type": "DatasetReference",
 						"parameters": {
-							"SourceFolder": "input"
+							"SourceFolder": {
+								"value": "@pipeline().parameters.SourceFolder",
+								"type": "Expression"
+							}
 						}
 					},
 					"fieldList": [
@@ -27,6 +30,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -92,7 +96,10 @@
 									"referenceName": "forEachInput",
 									"type": "DatasetReference",
 									"parameters": {
-										"SourceFolder": "input"
+										"SourceFolder": {
+											"value": "@pipeline().parameters.SourceFolder",
+											"type": "Expression"
+										}
 									}
 								}
 							],
@@ -107,6 +114,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"SourceFolder": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
