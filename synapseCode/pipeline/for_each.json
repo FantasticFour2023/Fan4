@@ -73,7 +73,12 @@
 									"type": "BinarySource",
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
-										"fileListPath": {
+										"recursive": true,
+										"wildcardFolderPath": {
+											"value": "@pipeline().parameters.SourceFolder",
+											"type": "Expression"
+										},
+										"wildcardFileName": {
 											"value": "@item().name",
 											"type": "Expression"
 										},
