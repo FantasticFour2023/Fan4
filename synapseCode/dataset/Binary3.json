@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"folderPath": {
-					"value": "input/*/*/*",
+					"value": "input",
 					"type": "Expression"
 				},
 				"fileSystem": "fantasticfourfilesystem"
