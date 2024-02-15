@@ -1,0 +1,21 @@
+{
+	"name": "Binary3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "input/*/*/*",
+					"type": "Expression"
+				},
+				"fileSystem": "fantasticfourfilesystem"
+			}
+		}
+	}
+}
