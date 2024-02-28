@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "a610dfa3-f36b-4788-a9ce-c28f49d0772f"
+				"spark.autotune.trackingId": "5b7e1cee-8317-4057-926d-03d5e8782512"
 			}
 		},
 		"metadata": {
@@ -53,14 +53,19 @@
 				"metadata": {
 					"microsoft": {
 						"language": "python"
-					}
+					},
+					"collapsed": false
 				},
 				"source": [
 					"%%pyspark\r\n",
 					"df = spark.read.load('abfss://fantasticfourfilesystem@fantasticfouraccount.dfs.core.windows.net/sfinput/Feedback_Collector__c.parquet', format='parquet')\r\n",
-					"display(df.limit(10))"
+					"\r\n",
+					"\r\n",
+					"# Save the dataframe as a delta table\r\n",
+					"delta_table_path = \"/delta/myDeltaLakeData\"\r\n",
+					"df.write.format(\"delta\").save(delta_table_path)"
 				],
-				"execution_count": 1
+				"execution_count": 2
 			}
 		]
 	}
