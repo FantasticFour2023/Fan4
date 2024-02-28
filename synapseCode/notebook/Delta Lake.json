@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "11dce7fd-a7cc-4c5d-9207-0c7156cdfd8c"
+				"spark.autotune.trackingId": "566e2aa2-c613-4c7c-b9ac-48360ea9c3e3"
 			}
 		},
 		"metadata": {
@@ -66,6 +66,28 @@
 					"df.write.format(\"delta\").save(delta_table_path)"
 				],
 				"execution_count": 2
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%sql\r\n",
+					"\r\n",
+					"CREATE TABLE ManagedSalesOrders\r\n",
+					"(\r\n",
+					"    Orderid INT NOT NULL,\r\n",
+					"    OrderDate TIMESTAMP NOT NULL,\r\n",
+					"    CustomerName STRING,\r\n",
+					"    SalesTotal FLOAT NOT NULL\r\n",
+					")\r\n",
+					"USING DELTA"
+				]
 			}
 		]
 	}
