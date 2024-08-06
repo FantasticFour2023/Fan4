@@ -14,6 +14,9 @@
 		"Salesforce1_securityToken": {
 			"value": ""
 		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
 		"fantasticfoursynapse-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:fantasticfoursynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
