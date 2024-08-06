@@ -20,6 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFolderPath": "gCGHJAV",
+							"wildcardFileName": "*.cfv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
