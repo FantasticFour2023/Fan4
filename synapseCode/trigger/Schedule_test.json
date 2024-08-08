@@ -14,10 +14,10 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Hour",
-				"interval": 8,
+				"frequency": "Minute",
+				"interval": 1,
 				"startTime": "2024-08-06T18:13:00",
-				"endTime": "2024-08-07T18:13:00",
+				"endTime": "2024-08-09T18:13:00",
 				"timeZone": "India Standard Time"
 			}
 		}
