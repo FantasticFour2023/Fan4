@@ -61,7 +61,7 @@
 						"type": "IntegrationRuntimeReference"
 					},
 					"body": {
-						"value": " {\n    \"message\" : \"This is a custom dynamic message from your pipeline with run ID @{pipeline().RunId}.\",\n    \"dataFactoryName\" : \"@{pipeline().DataFactory}\", \n    \"pipelineName\" : \"@{pipeline().Pipeline}\", \n    \"receiver\" : \"@{pipeline().parameters.receiver}\"\n    \"error\" : \"@{activity(\"Lookup1\").error.Message}\"\n }",
+						"value": "{\n   \"message\" : \"hello\"\n}",
 						"type": "Expression"
 					}
 				}
