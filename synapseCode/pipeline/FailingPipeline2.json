@@ -29,7 +29,7 @@
 						"type": "IntegrationRuntimeReference"
 					},
 					"body": {
-						"value": "{\n    \"message\" : \"This is a custom dynamic message from your pipeline with run ID @{pipeline().Pipeline}.\",\n    \"receiver\" : \"@{activity('Copy data1').output.errors[0].Message}\"\n   }",
+						"value": "{\n    \"message\" : \"This is a custom dynamic message from your pipeline - @{pipeline().Pipeline}.\",\n    \"receiver\" : \"@{activity('Copy data1').output.errors[0].Message}\"\n   }",
 						"type": "Expression"
 					}
 				}
