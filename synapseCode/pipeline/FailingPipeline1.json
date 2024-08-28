@@ -1,5 +1,5 @@
 {
-	"name": "Fail_Test_2",
+	"name": "FailingPipeline1",
 	"properties": {
 		"activities": [
 			{
