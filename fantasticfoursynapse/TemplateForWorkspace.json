@@ -44,7 +44,7 @@
 			"type": "string",
 			"defaultValue": "https://fantasticfouraccount.dfs.core.windows.net"
 		},
-		"Test_trigger_properties_FailingPipeline_parameters_receiver": {
+		"Test_trigger_properties_FailingPipeline_LogicApps_parameters_receiver": {
 			"type": "string",
 			"defaultValue": "pranavblog2000@gmail.com"
 		}
@@ -261,7 +261,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/FailingPipeline')]",
+			"name": "[concat(parameters('workspaceName'), '/FailingPipeline2')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -447,7 +447,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/FailingPipeline2')]",
+			"name": "[concat(parameters('workspaceName'), '/FailingPipeline_LogicApps')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -1749,6 +1749,38 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Test_trigger')]",
+			"type": "Microsoft.Synapse/workspaces/triggers",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "FailingPipeline_LogicApps",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"receiver": "[parameters('Test_trigger_properties_FailingPipeline_LogicApps_parameters_receiver')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 15,
+						"startTime": "2024-09-02T06:39:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/FailingPipeline_LogicApps')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/AutoResolveIntegrationRuntime')]",
 			"type": "Microsoft.Synapse/workspaces/integrationRuntimes",
 			"apiVersion": "2019-06-01-preview",
@@ -2600,39 +2632,6 @@
 			},
 			"dependsOn": [],
 			"location": "eastus"
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/Test_trigger')]",
-			"type": "Microsoft.Synapse/workspaces/triggers",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "FailingPipeline",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"receiver": "[parameters('Test_trigger_properties_FailingPipeline_parameters_receiver')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 15,
-						"startTime": "2024-09-02T06:39:00",
-						"timeZone": "India Standard Time",
-						"schedule": {}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/pipelines/FailingPipeline')]"
-			]
 		}
 	]
 }
