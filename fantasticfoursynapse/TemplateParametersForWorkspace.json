@@ -31,6 +31,9 @@
 		},
 		"fantasticfoursynapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://fantasticfouraccount.dfs.core.windows.net"
+		},
+		"Test_trigger_properties_FailingPipeline_parameters_receiver": {
+			"value": "pranavblog2000@gmail.com"
 		}
 	}
 }
