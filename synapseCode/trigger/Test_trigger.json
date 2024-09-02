@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "FailingPipeline",
+					"referenceName": "FailingPipeline_LogicApps",
 					"type": "PipelineReference"
 				},
 				"parameters": {
