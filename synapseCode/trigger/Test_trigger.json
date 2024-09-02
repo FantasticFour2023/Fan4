@@ -8,6 +8,9 @@
 				"pipelineReference": {
 					"referenceName": "FailingPipeline",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"receiver": "pranavblog2000@gmail.com"
 				}
 			}
 		],
