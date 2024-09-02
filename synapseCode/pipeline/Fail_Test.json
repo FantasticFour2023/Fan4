@@ -43,7 +43,7 @@
 					{
 						"activity": "Lookup1",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
